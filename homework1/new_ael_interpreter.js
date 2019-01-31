@@ -1,4 +1,5 @@
 // TODO: add to the language Ael a right-associative exponentiation operator, and write an interpreter for the extended language.
+// Check our solution with Toal!
 
 const ohm = require("ohm-js");
 
