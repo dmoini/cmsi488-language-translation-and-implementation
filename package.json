@@ -1,0 +1,24 @@
+{
+  "name": "cmsi488",
+  "version": "1.0.0",
+  "description": "Assignments from CMSI 488: Language Translation and Implementation course at Loyola Marymount University.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmoini/cmsi488.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmoini/cmsi488/issues"
+  },
+  "homepage": "https://github.com/dmoini/cmsi488#readme",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
