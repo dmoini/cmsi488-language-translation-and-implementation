@@ -1,7 +1,6 @@
-// TODO: add to the language Ael a right-associative exponentiation operator, and write an interpreter for the extended language.
-// Check our solution with Toal!
+// TODO: Check our solution with Toal!
 
-const ohm = require("ohm-js");
+const ohm = require('ohm-js');
 
 const aelGrammar = ohm.grammar(`Ael {
   Exp     = Exp "+" Term     --plus
@@ -14,7 +13,7 @@ const aelGrammar = ohm.grammar(`Ael {
   Factor  = "-" Primary      --negate
           | Primary
           | Base
-  Base    = Base "**" Expo    -- exponentiation
+  Base    = Base "**" Expo    --exponentiation
           | Primary
   Expo    = Base
           | Primary
@@ -25,7 +24,7 @@ const aelGrammar = ohm.grammar(`Ael {
 }`);
 
 // This language is so simple, we don't need an AST.
-const semantics = aelGrammar.createSemantics().addOperation("eval", {
+const semantics = aelGrammar.createSemantics().addOperation('eval', {
   Exp_plus(e, _, t) {
     return e.eval() + t.eval();
   },
@@ -40,6 +39,9 @@ const semantics = aelGrammar.createSemantics().addOperation("eval", {
   },
   Factor_negate(_, p) {
     return -p.eval();
+  },
+  Base_exponentiation(b, _, p) {
+    return b.eval() ** p.eval();
   },
   Primary_parens(_1, e, _2) {
     return e.eval();
