@@ -1,7 +1,6 @@
 // TODO: Extend this Ael compiler to compile the extended exponent functionality we added to the 
 // interpreter file.
 
-
 // A compiler for Ael.
 //
 // Example usage:
@@ -17,13 +16,19 @@ const aelGrammar = ohm.grammar(`Ael {
   Exp     = Exp addop Term     --binary
           | Term
   Term    = Term mulop Factor  --binary
+          | Base
           | Factor
   Factor  = "-" Primary        --negate
           | Primary
+          | Base
+  Base    = Base expop Expo    --binary
+          | Primary
+  Expo    = Base               --base
   Primary = "(" Exp ")"        --parens
           | number
   addop   = "+" | "-"
-  mulop   = "*" | "/"
+  mulop   = ~"**" "*" | "/"
+  expop   = "**"
   number  = digit+
   space  := " " | "\t"
 }`);
@@ -69,6 +74,8 @@ const semantics = aelGrammar.createSemantics().addOperation('tree', {
   Exp_binary(left, op, right) { return new BinaryExpression(left.tree(), op.sourceString, right.tree()); },
   Term_binary(left, op, right) { return new BinaryExpression(left.tree(), op.sourceString, right.tree()); },
   Factor_negate(op, operand) { return new UnaryExpression('-', operand.tree()); },
+  Base_binary(left, op, right) { return new BinaryExpression(left.tree(), op.sourceString, right.tree()); },
+  Expo_base(base) { return base.tree(); },
   Primary_parens(open, expression, close) { return expression.tree(); },
   number(chars) { return new NumericLiteral(+this.sourceString); },
 });
@@ -104,6 +111,7 @@ class StackGenerator extends Generator {
   visitUnaryExpression(e) { this.visit(e.operand); this.emit('NEG'); }
   visitNumericLiteral(e) { this.emit(`PUSH ${e.value}`); }
 }
+// TODO: Add '**': 'EXP' to StackGenerator.ops???
 StackGenerator.ops = { '+': 'ADD', '-': 'SUB', '*': 'MUL', '/': 'DIV' };
 
 /* MAIN */
