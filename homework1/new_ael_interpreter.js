@@ -16,7 +16,6 @@ const aelGrammar = ohm.grammar(`Ael {
   Base    = Base "**" Expo    --exponentiation
           | Primary
   Expo    = Base
-          | Primary
   Primary = "(" Exp ")"      --parens
           | number
   number  = digit+
