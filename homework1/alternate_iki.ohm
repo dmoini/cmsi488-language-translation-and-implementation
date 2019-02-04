@@ -26,9 +26,9 @@ Iki {
   Program     =  Block
   Block       =  (Stmt ";")+
   Stmt        =  Type id                         -- decl
-              |  TypeExp assop Exp               -- assignment
-              |  "STDIN" assop TypeExp           -- read
-              |  "STDOUT" assop Exp              -- write
+              |  TypeExp assignop Exp            -- assignment
+              |  "STDIN" inop TypeExp            -- read
+              |  "STDOUT" assignop Exp           -- write
               |  "while" Exp "{" Block "}"       -- while
   Type        =  "int" | "bool"
   Exp         =  Exp "or" Exp1                   -- binary
@@ -59,7 +59,8 @@ Iki {
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   mulop       =  "*" | "/" | "%"
   prefixop    =  ~"--" "-" | "not"
-  assop       =  "->" | "<-"
+  assignop    = "<-"
+  inop        = "->"
 
   space      +=  comment
   comment     =  "--" (~"\n" any)* "\n"
