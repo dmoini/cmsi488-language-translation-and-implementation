@@ -1,6 +1,6 @@
 // TODO: Check our solution with Toal!
 
-const ohm = require('ohm-js');
+const ohm = require("ohm-js");
 
 const aelGrammar = ohm.grammar(`Ael {
   Exp     = Exp "+" Term     --plus
@@ -13,7 +13,7 @@ const aelGrammar = ohm.grammar(`Ael {
   Factor  = "-" Primary      --negate
           | Primary
           | Base
-  Base    = Base "**" Expo    --exponentiation
+  Base    = Base "**" Expo   --exponentiation
           | Primary
   Expo    = Base
   Primary = "(" Exp ")"      --parens
@@ -23,7 +23,7 @@ const aelGrammar = ohm.grammar(`Ael {
 }`);
 
 // This language is so simple, we don't need an AST.
-const semantics = aelGrammar.createSemantics().addOperation('eval', {
+const semantics = aelGrammar.createSemantics().addOperation("eval", {
   Exp_plus(e, _, t) {
     return e.eval() + t.eval();
   },
