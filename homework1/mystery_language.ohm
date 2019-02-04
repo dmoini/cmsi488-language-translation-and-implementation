@@ -1,41 +1,108 @@
 mysteryLanguage {
-FunctionDeclaration = "fun" identifier"("Params")" "{" Expression "}"
-Params = ListOf<identifier, ",">
-Call = identifier"("ListOf<Expression, ",">")"
-Expression =  Expression "or" Exp1   -- disjunction 
-                |  Exp1
-Exp1        =  Exp1 "and" Exp2  --conjunction 
-                |  Exp2
-Exp2        =  Exp3 relop Exp3  --binary
-                |  Exp3
-Exp3        =  Exp3 addop Exp4      -- additionsubtraction             
-                |  Exp4
-Exp4        =  Exp4 mulop Exp5       --multiplicationdivision          
-                |  Exp5
-Exp5        =  prefixop Exp6       --unary           
-                |  Exp6
-Exp6        = postfixop Exp6    --posturnary
-			    | Exp6  
-Exp7	    = Literal                     --otehr     
-				| Exp8                
-Literal     =  "null"
-              |  "true"
-              |  "false"
+  Func        =  "fun" identifier "(" Params ")" "{" Exp "}"
+  Params      =  ListOf<identifier, ",">
+  Call        =  identifier "(" ListOf<Exp, ","> ")"
+  Cond        =  Exp "if" Exp "else" Exp
+  Exp         =  Exp "or" Exp1                    --binary
+              |  Exp1
+  Exp1        =  Exp1 "and" Exp2                  --binary
+              |  Exp2
+  Exp2        =  Exp3 relop Exp3                  --binary
+              |  Exp3
+  Exp3        =  Exp3 addop Exp4                  --binary
+              |  Exp4
+  Exp4        =  Exp4 mulop Exp5                  --binary
+              |  Exp5
+  Exp5        =  prefixop Exp6                    --unary
+              |  Exp6
+  Exp6        =  Exp7 postfixop                   --unary
+              |  Exp7
+  Exp7        =  Literal
+              |  identifier
+              |  Call
+              |  "(" Exp ")"                      --parens
+  // Exp10       =  Literal
+  //             = identifier
+  //             = Call
+  //             = "(" Exp ")"
+  Literal     =  numlit
               |  stringlit
-Exp8        =  Call     --functioncall   
-                | Conditional
-Conditional = Expression "if" Expression "else" Expression
-identifier = letter | digit+
-addop       =  "+" | "-"
-relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
-mulop       =  "*" | "/" | "%"
-prefixop    =  ~"--" "-" | "not"
-postfixop = "!"
-stringlit   =  "\"" (char | "\'")* "\""
-char        =  escape
-              |  ~"\\" ~"\"" ~"'" ~"\n" any
-              
-h           =  hexDigit
-  escape      =  "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
-  hexseq      =  "\\" h h? h? h? h? h? h? h? ";"
+  identifier  =  "TODO"
+  relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
+  addop       =  "+" | "-"
+  mulop       =  "*" | "/" | "%"
+  prefixop    =  "-"
+  postfixop   =  "!"
+  numlit      =  "TODO"
+  stringlit   =  "TODO"
+
+
+
+
+
+
+
+
+
+
+
+
+
+  comment   =  " --" (~"\n" any)* "\n"
+              |  "/*" Exp "*/"
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// mysteryLanguage {
+//   Func        = "fun" identifier "(" Params ")" "{" Exp "}"
+//   Params      = ListOf<identifier, ",">   
+//   Call        = identifier "(" ListOf<Exp, ","> ")"
+//   Exp         = Exp andor Exp           --andor 
+//               | Exp1
+//   Exp1        = Exp2 relop Exp2         --relop
+//               | Exp2
+//   Exp2        = Exp2 addop Exp3         --addsub            
+//               | Exp3
+//   Exp3        = Exp3 mulop Exp4         --muldiv          
+//               | Exp4
+//   Exp4        = prefixop Exp5           --preunary           
+//               | Exp5
+//   Exp5        = Exp6 postfixop          --posturnary
+//               | Exp6  
+//   Exp6	      = Literal                 --other     
+//               | Exp7                
+//   Exp7        = Call                    --funccall   
+//               | Conditional
+//               | "(" Exp ")"
+//   Literal     = "null"
+//               | "true"
+//               | "false"
+//               | stringlit
+//   Conditional = Exp "if" Exp "else" Exp
+//   identifier  = ((letter | "$")(letter | digit | "@" | "$")*)*
+//   andor       = "and" | "or"
+//   addop       = "+" | "-"
+//   relop       = "<=" | "<" | "==" | "!=" | ">=" | ">"
+//   mulop       = "*" | "/" | "%"
+//   prefixop    = ~"--" "-" | "not"
+//   postfixop   = "!"
+//   stringlit   = "\"" (char | "\'")* "\""
+//   char        = escape
+//               | ~"\\" ~"\"" ~"'" ~"\n" any
+//   h           = hexDigit
+//   escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
+//   hexseq      = "\\" h h? h? h? h? h? h? h? ";"
+//   space      :=  "\x20" | "\x09" | "\x0A" | "\x0D" | comment space      :=  "\x20" | "\x09" | "\x0A" | "\x0D" | comment
+//   comment     =  "/*" (~"\n" any)* "*/"
+// }
