@@ -63,5 +63,5 @@ Exp4    = "-"? Exp5 ("**"  Exp5)?
 comment = "--" (~"\n" any)* "\n"
 ```
 
-THe AST would be
+The AST would be
 ![Abstract syntax tree g](images/ast-g.png)
