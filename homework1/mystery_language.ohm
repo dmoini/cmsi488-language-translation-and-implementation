@@ -4,7 +4,7 @@
 mysteryLanguage {
   Func        =  "fun" identifier "(" Params ")" "{" Block "}"
   Params      =  ListOf<identifier, ",">
-  Block       =  (Stmt)+
+  Block       =  (Stmt)*
   Stmt = Exp ";"
   			| Cond ";"  
         | Call ";"
@@ -29,7 +29,7 @@ mysteryLanguage {
               |  "(" Exp ")" 		--parens
   Literal     =  numlit
               |  stringlit
-  identifier  = ((letter | "$")(letter | digit | "@" | "$" | "_")*)*
+  identifier  = (letter | digit | "@" | "$" | "_")+
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   addop       =  "+" | "-"
   mulop       =  "*" | "/" | "%"
