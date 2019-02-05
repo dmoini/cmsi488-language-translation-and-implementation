@@ -1,9 +1,14 @@
-// need to add zero or more params
+// Version one that does not work
+// parentheses are not working
 
 mysteryLanguage {
-  Func        =  "fun" identifier "(" Params ")" "{" Exp "}"
+  Func        =  "fun" identifier "(" Params ")" "{" Block "}"
   Params      =  ListOf<identifier, ",">
-  Call        =  identifier "(" ListOf<Exp, ","> ")"
+  Block       =  (Stmt)+
+  Stmt = Exp ";"
+  			| Cond ";"  
+        | Call ";"
+  Call        =  identifier "(" Params ")"
   Cond        =  Exp "if" Exp "else" Exp
   Exp         =  Exp "or" Exp1                    --binary
               |  Exp1
@@ -21,7 +26,6 @@ mysteryLanguage {
               |  Exp7
   Exp7        =  Literal 
               |  identifier 
-              |  Call 
               |  "(" Exp ")" 		--parens
   Literal     =  numlit
               |  stringlit
@@ -39,49 +43,54 @@ mysteryLanguage {
   escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
   hexseq      = "\\" h h? h? h? h? h? h? h? ";"
   comment   =  " /*" (~"\n" any)* "*/"
-  endop = ";"
 }
 
 
-// mysteryLanguage {
-//   Func        = "fun" identifier "(" Params ")" "{" Exp "}"
-//   Params      = ListOf<identifier, ",">   
-//   Call        = identifier "(" ListOf<Exp, ","> ")"
-//   Exp         = Exp andor Exp           --andor 
-//               | Exp1
-//   Exp1        = Exp2 relop Exp2         --relop
-//               | Exp2
-//   Exp2        = Exp2 addop Exp3         --addsub            
-//               | Exp3
-//   Exp3        = Exp3 mulop Exp4         --muldiv          
-//               | Exp4
-//   Exp4        = prefixop Exp5           --preunary           
-//               | Exp5
-//   Exp5        = Exp6 postfixop          --posturnary
-//               | Exp6  
-//   Exp6	      = Literal                 --other     
-//               | Exp7                
-//   Exp7        = Call                    --funccall   
-//               | Conditional
-//               | "(" Exp ")"
-//   Literal     = "null"
-//               | "true"
-//               | "false"
-//               | stringlit
-//   Conditional = Exp "if" Exp "else" Exp
-//   identifier  = ((letter | "$")(letter | digit | "@" | "$")*)*
-//   andor       = "and" | "or"
-//   addop       = "+" | "-"
-//   relop       = "<=" | "<" | "==" | "!=" | ">=" | ">"
-//   mulop       = "*" | "/" | "%"
-//   prefixop    = ~"--" "-" | "not"
-//   postfixop   = "!"
-//   stringlit   = "\"" (char | "\'")* "\""
-//   char        = escape
-//               | ~"\\" ~"\"" ~"'" ~"\n" any
-//   h           = hexDigit
-//   escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
-//   hexseq      = "\\" h h? h? h? h? h? h? h? ";"
-//   space      :=  "\x20" | "\x09" | "\x0A" | "\x0D" | comment space      :=  "\x20" | "\x09" | "\x0A" | "\x0D" | comment
-//   comment     =  "/*" (~"\n" any)* "*/"
-// }
+
+// Version 2 that also does not work
+// comments do not work
+// parentheses cause weirdness
+mysteryLanguage {
+  Func        =  "fun" identifier "(" Params ")" "{" Block "}"
+  Params      =  ListOf<identifier, ",">
+  Block       =  (Stmt)*
+  Stmt = Exp ";"
+  			| Cond ";"  
+            | Call ";"
+  Call        =  identifier "(" Params")"
+  Cond        =  Exp "if" Exp "else" Exp
+ Exp         =  NonemptyListOf<Exp1, "||">
+  Exp1        =  NonemptyListOf<Exp2, "&&">
+  Exp2        =  NonemptyListOf<Exp3, "|">
+  Exp3        =  NonemptyListOf<Exp4, "^">
+  Exp4        =  NonemptyListOf<Exp5, "&">
+  Exp5        =  Exp7 (relop Exp7)?
+  Exp7        =  NonemptyListOf<Exp8, addop>
+  Exp8        =  NonemptyListOf<Exp9, mulop>
+  Exp9        =  prefixop? Exp10
+  Exp10     =    Exp11 postfixop?
+  Exp11       =  Literal
+              |  "(" Exp ")"                -- parens
+  Literal     =  numlit
+              |  stringlit
+  identifier  = ((letter | "$")(letter | digit | "@" | "$" | "_")*)*
+  relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
+  addop       =  "+" | "-"
+  mulop       =  "*" | "/" | "%"
+  prefixop    =  "-"
+  postfixop   =  "!"
+  numlit      =  digit+
+  stringlit   = "\"" (char | "\'")* "\"" ";"
+  char        = escape
+              | ~"\\" ~"\"" ~"'" ~"\n" any
+  h           = hexDigit
+  escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
+  hexseq      = "\\" h h? h? h? h? h? h? h? ";"
+  space      :=  "\x20" | "\x09" | "\x0A" | "\x0D" | comment
+  comment   =  " --" (~"\n" any)* "\n"
+}
+
+
+
+
+
