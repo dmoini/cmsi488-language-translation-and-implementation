@@ -31,25 +31,13 @@ mysteryLanguage {
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   addop       =  "+" | "-"
   mulop       =  "*" | "/" | "%"
-  prefixop    =  "-"
+  prefixop    =  ~"--" "-"
   postfixop   =  "!"
   numlit      =  "TODO"
   stringlit   =  "TODO"
 
-
-
-
-
-
-
-
-
-
-
-
-
-  comment   =  " --" (~"\n" any)* "\n"
-              |  "/*" Exp "*/"
+  comment     =  "--" (~"\n" any)* "\n" | "/*" (any)* "*/"
+  // comment   =  "--" (~"\n" any)* "\n" | "/*" (Exp) "*/"
 }
 
 
