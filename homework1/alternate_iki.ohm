@@ -25,7 +25,7 @@
 Iki {
   Program     =  Block
   Block       =  (Stmt ";")+
-  Stmt        =  Type id                         -- decl
+  Stmt        =  Type ListOf<id, ",">            -- decl
               |  TypeExp assignop Exp            -- assignment
               |  "STDIN" inop TypeExp            -- read
               |  "STDOUT" assignop Exp           -- write
