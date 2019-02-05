@@ -29,7 +29,7 @@ mysteryLanguage {
               |  "(" Exp ")" 		--parens
   Literal     =  numlit
               |  stringlit
-  identifier  = (letter | digit | "@" | "$" | "_")+
+  identifier  = (letter | "$")(letter | digit | "@" | "$" | "_")+
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   addop       =  "+" | "-"
   mulop       =  "*" | "/" | "%"
@@ -43,51 +43,6 @@ mysteryLanguage {
   escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
   hexseq      = "\\" h h? h? h? h? h? h? h? ";"
   comment   =  " /*" (~"\n" any)* "*/"
-}
-
-
-
-// Version 2 that also does not work
-// comments do not work
-// parentheses cause weirdness
-mysteryLanguage {
-  Func        =  "fun" identifier "(" Params ")" "{" Block "}"
-  Params      =  ListOf<identifier, ",">
-  Block       =  (Stmt)*
-  Stmt = Exp ";"
-  			| Cond ";"  
-            | Call ";"
-  Call        =  identifier "(" Params")"
-  Cond        =  Exp "if" Exp "else" Exp
- Exp         =  NonemptyListOf<Exp1, "||">
-  Exp1        =  NonemptyListOf<Exp2, "&&">
-  Exp2        =  NonemptyListOf<Exp3, "|">
-  Exp3        =  NonemptyListOf<Exp4, "^">
-  Exp4        =  NonemptyListOf<Exp5, "&">
-  Exp5        =  Exp7 (relop Exp7)?
-  Exp7        =  NonemptyListOf<Exp8, addop>
-  Exp8        =  NonemptyListOf<Exp9, mulop>
-  Exp9        =  prefixop? Exp10
-  Exp10     =    Exp11 postfixop?
-  Exp11       =  Literal
-              |  "(" Exp ")"                -- parens
-  Literal     =  numlit
-              |  stringlit
-  identifier  = ((letter | "$")(letter | digit | "@" | "$" | "_")*)*
-  relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
-  addop       =  "+" | "-"
-  mulop       =  "*" | "/" | "%"
-  prefixop    =  "-"
-  postfixop   =  "!"
-  numlit      =  digit+
-  stringlit   = "\"" (char | "\'")* "\"" ";"
-  char        = escape
-              | ~"\\" ~"\"" ~"'" ~"\n" any
-  h           = hexDigit
-  escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
-  hexseq      = "\\" h h? h? h? h? h? h? h? ";"
-  space      :=  "\x20" | "\x09" | "\x0A" | "\x0D" | comment
-  comment   =  " --" (~"\n" any)* "\n"
 }
 
 
