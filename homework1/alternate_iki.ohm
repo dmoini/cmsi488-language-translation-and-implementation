@@ -24,11 +24,11 @@
 
 Iki {
   Program     =  Block
-  Block       =  (Stmt ";")+
-  Stmt        =  Type id                         -- decl
-              |  TypeExp assignop Exp            -- assignment
-              |  "STDIN" inop TypeExp            -- read
-              |  "STDOUT" assignop Exp           -- write
+  Block       =  (Stmt)+
+  Stmt        =  Type ListOf<id, ","> ";"        -- decl
+              |  TypeExp assignop Exp ";"        -- assignment
+              |  "STDIN" inop TypeExp ";"        -- read
+              |  "STDOUT" assignop Exp ";"       -- write
               |  "while" Exp "{" Block "}"       -- while
   Type        =  "int" | "bool"
   Exp         =  Exp "or" Exp1                   -- binary

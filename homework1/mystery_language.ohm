@@ -17,39 +17,28 @@ mysteryLanguage {
               |  Exp6
   Exp6        =  Exp7 postfixop                   --unary
               |  Exp7
-  Exp7        =  Literal
-              |  identifier
-              |  Call
-              |  "(" Exp ")"                      --parens
-  // Exp10       =  Literal
-  //             = identifier
-  //             = Call
-  //             = "(" Exp ")"
+  Exp7        =  Literal 
+              |  identifier 
+              |  Call 
+              |  "(" Exp ")" 		--parens
   Literal     =  numlit
               |  stringlit
-  identifier  =  "TODO"
+  identifier  = ((letter | "$")(letter | digit | "@" | "$" | "_")*)*
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   addop       =  "+" | "-"
   mulop       =  "*" | "/" | "%"
-  prefixop    =  ~"--" "-"
+  prefixop    =  "-"
   postfixop   =  "!"
-  numlit      =  "TODO"
-  stringlit   =  "TODO"
-
-  comment     =  "--" (~"\n" any)* "\n" | "/*" (any)* "*/"
-  // comment   =  "--" (~"\n" any)* "\n" | "/*" (Exp) "*/"
+  numlit      =  digit+
+  stringlit   = "\"" (char | "\'")* "\"" ";"
+  char        = escape
+              | ~"\\" ~"\"" ~"'" ~"\n" any
+  h           = hexDigit
+  escape      = "\\\\" | "\\\"" | "\\'" | "\\n" | "\\t" | hexseq
+  hexseq      = "\\" h h? h? h? h? h? h? h? ";"
+  comment   =  " /*" (~"\n" any)* "*/"
+  endop = ";"
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // mysteryLanguage {
