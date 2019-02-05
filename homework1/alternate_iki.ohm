@@ -47,10 +47,10 @@ Iki {
               |  intlit
               |  TypeExp
               |  "(" Exp ")"                     -- parens
-  TypeExp      = id
+  TypeExp     =  id
 
-  keyword     =  ("STDIN" | "STDOUT" | "while" | "{"
-              |  "}" | "int" | "bool" | "true" | "false") ~idrest
+  keyword     =  ("STDIN" | "STDOUT" | "while" | "int"
+              |  "bool" | "true" | "false") ~idrest
   id          =  ~keyword letter idrest*
   idrest      =  "_" | alnum
   intlit      =  digit+
@@ -59,8 +59,8 @@ Iki {
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   mulop       =  "*" | "/" | "%"
   prefixop    =  ~"--" "-" | "not"
-  assignop    = "<-"
-  inop        = "->"
+  assignop    =  "<-"
+  inop        =  "->"
 
   space      +=  comment
   comment     =  "--" (~"\n" any)* "\n"
