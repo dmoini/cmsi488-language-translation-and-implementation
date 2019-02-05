@@ -112,7 +112,7 @@ class StackGenerator extends Generator {
   visitNumericLiteral(e) { this.emit(`PUSH ${e.value}`); }
 }
 // TODO: Add '**': 'EXP' to StackGenerator.ops???
-StackGenerator.ops = { '+': 'ADD', '-': 'SUB', '*': 'MUL', '/': 'DIV' };
+StackGenerator.ops = { '+': 'ADD', '-': 'SUB', '*': 'MUL', '/': 'DIV', '**': 'EXP' };
 
 /* MAIN */
 
