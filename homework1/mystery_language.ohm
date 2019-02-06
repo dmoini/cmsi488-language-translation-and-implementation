@@ -1,10 +1,11 @@
 mysteryLanguage {
+  Program     = Func+
   Func        =  "fun" identifier "(" Params ")" "{" Block "}"
   Params      =  ListOf<identifier, ",">
-  Block       =  (Stmt)*
+  Block       =  (Stmt)+
   Stmt = Exp ";"
-  			| Cond ";"  
         | Call ";"
+  			| Cond ";"  
   Call        =  identifier "(" Params ")"
   Cond        =  Exp "if" Exp "else" Exp
   Exp         =  Exp "or" Exp1                    --binary
@@ -26,7 +27,9 @@ mysteryLanguage {
               |  "(" Exp ")" 		                  --parens
   Literal     =  numlit
               |  stringlit
-  identifier  = (letter | "$")(letter | digit | "@" | "$" | "_")*
+  identifier  = ~keyword (letter | "$")(alnum | "@" | "$" | "_")*
+  keyword     = ("fun" | "if" | "else") ~idrest
+  idrest      =  "_" | alnum
   relop       =  "<=" | "<" | "==" | "!=" | ">=" | ">"
   addop       =  "+" | "-"
   mulop       =  "*" | "/" | "%"
