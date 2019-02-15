@@ -14,25 +14,36 @@ function isLegalMasterCard(s) {
 }
 
 function isAdaNumericLiteral(s) {
-  return
+  const decimal_literal = new RegExp(/[0-9_]*\.?[0-9_]+([eE][+-]?[0-9_]+)?/)
+  const based_literal = new RegExp(/(([2-9]|1[0-6])#)([0-9A-F_]*\.?[0-9A-F_]+)+(#[eE][+-]?[0-9_]+)/)
+  const numeric_literal = new RegExp(decimal_literal + "|" + based_literal)
+  return numeric_literal.test(s)
 }
 
+// Also we should save some for Serena and Teddy
+// Yeah there are three left they can split
+// https://regex101.com
+
+// Not sure about the correctness of this syntax
 function isBasicLatin1(s) {
-  return
+  return /^[a-zA-Z][^oO][^oO][a-zA-Z]*$/.test(s)
 }
 
+// Hey I'll do this one! -Alexia
 function isBinaryDivisibleByThirtyTwo(s) {
-  return
+  // make sure the last 5 digits are '00000' -Donovan
+  return 
 }
 
 function isDecimalTwoToThirtySix(s) {
-  return
+  return /^[2-9]|[1-2][0-9]|3[0-6]$/.test(s)
 }
 
 function isNonNestingMLStyle(s) {
   return
 }
 
+// I'll try and do this one too :) - Alexia
 function isBasicLatin2(s) {
   return
 }
@@ -40,3 +51,5 @@ function isBasicLatin2(s) {
 function isBasicLatin3(s) {
   return
 }
+
+
