@@ -30,7 +30,10 @@ AdaNumericLiteral {
 }
 
 BasicLatin1 {
-  // TODO
+	exp = overThreeString | threeString |  oneTwoStrings
+  oneTwoStrings = letter (letter)?
+  threeString = letter ~("oo") letter letter 
+  overThreeString = letter letter letter letter+
 }
 
 BinaryDivisibleByThirtyTwo {
@@ -50,5 +53,7 @@ BasicLatin2 {
 }
 
 BasicLatin3 {
-  // TODO
+  // not sure if it should accept things like files
+	exp = ~(badWords) (letter)*
+    badWords = "file" | "for" | "find"
 }
