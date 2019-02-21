@@ -1,11 +1,54 @@
-canadianPostalCode {
-  exp              = (firstAlpha + digit approvedAlpha + space +  digit + approvedAlpha + digit)              --code
-  firstAlpha       = ~badFirst upper
-  approvedAlpha    = ~badAlpha upper 
-  badAlpha         = "D" | "F" | "I" | "O" | "Q" | "U"
-  badFirst         = badAlpha | "W" | "Z"
+CanadianPostalCode {
+  exp               = (firstAlpha + digit approvedAlpha + space +  digit + approvedAlpha + digit)              --code
+  firstAlpha        = ~badFirst upper
+  approvedAlpha     = ~badAlpha upper 
+  badAlpha          = "D" | "F" | "I" | "O" | "Q" | "U"
+  badFirst          = badAlpha | "W" | "Z"
 }
 
-legalVisaCard {
-  
+LegalVisaCard {
+  exp               = "4" lastDigits
+  threeDigits       = digit digit digit
+  lastDigits        = threeDigits threeDigits threeDigits threeDigits (threeDigits)?
+}
+
+LegalMasterCard {
+  exp               = (firstDigits lastDigits)
+  firstDigits       = caseA | caseB
+  caseA             = ("5" "1".."5") digit digit          --51-55
+  caseB             = "222" digit                         --2220-2229
+                    | "22" "3".."9" digit                 --2230-2299
+                    | "2" "3".."6" digit digit            --2300-2699
+                    | "27" "0".."1" digit                 --2700-2719
+                    | "2720"                              --2720
+  fourDigits        = digit digit digit digit
+  lastDigits        = fourDigits fourDigits fourDigits 
+}
+
+AdaNumericLiteral {
+  // TODO
+}
+
+BasicLatin1 {
+  // TODO
+}
+
+BinaryDivisibleByThirtyTwo {
+  // TODO
+}
+
+DecimalTwoToThirtySix {
+  // TODO
+}
+
+NonNestingMLStyle {
+  // TODO
+}
+
+BasicLatin2 {
+  // TODO
+}
+
+BasicLatin3 {
+  // TODO
 }
