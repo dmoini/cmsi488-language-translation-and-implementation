@@ -46,9 +46,9 @@ DecimalTwoToThirtySix {
 
 NonNestingMLStyle {
 	comment = "(*"  exp  "*)" 
-  exp =  exp exp   --sentence
+  exp =  exp exp        --sentences
          | letter+      --words
-         | space    --spaces   
+         | space        --spaces   
 }
 
 BasicLatin1 {
