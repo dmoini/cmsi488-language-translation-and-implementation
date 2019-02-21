@@ -1,0 +1,7 @@
+canadianPostalCode {
+  exp         =  (digit + firstAlpha + digit + space + approvedAlpha + digit + approvedAlpha)              --code
+  firstAlpha = upper ~badFirst
+  approvedAlpha = upper ~badAlpha
+  badFirst = badAlpha | "W" | "Z"
+  badAlpha = "D" | "F" | "I" | "O" | "Q" | "U"
+}

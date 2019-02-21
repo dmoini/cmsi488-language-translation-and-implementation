@@ -16,15 +16,13 @@ function isLegalMasterCard(s) {
 }
 
 function isAdaNumericLiteral(s) {
-  const decimal_literal = new RegExp(/[0-9_]*\.?[0-9_]+([eE][+-]?[0-9_]+)?/);
-  const based_literal = new RegExp(
-    /(([2-9]|1[0-6])#)([0-9A-F_]*\.?[0-9A-F_]+)+(#[eE][+-]?[0-9_]+)/
-  );
+  const decimal_literal = new RegExp(/^[0-9_]*\.?[0-9_]+([eE][+-]?[0-9_]+)?$/);
+  const based_literal = new RegExp(/^(([2-9]|1[0-6])#)([0-9A-F_]*\.?[0-9A-F_]+)+(#[eE][+-]?[0-9_]+)$/);
   const numeric_literal = new RegExp(decimal_literal + "|" + based_literal);
   return numeric_literal.test(s);
 }
 
-// Also we should save some for Serena and Teddy
+// Also we should save some for Teddy
 // Yeah there are three left they can split
 // https://regex101.com
 
@@ -39,7 +37,7 @@ function isBinaryDivisibleByThirtyTwo(s) {
 }
 
 function isDecimalTwoToThirtySix(s) {
-  return /^[2-9]|[1-2][0-9]|3[0-6]$/.test(s);
+  return /^\b([2-9]|[12][0-9]|3[0-6])\b$/.test(s);
 }
 
 function isNonNestingMLStyle(s) {
@@ -48,9 +46,9 @@ function isNonNestingMLStyle(s) {
 
 // I'll try and do this one too :) - Alexia
 function isBasicLatin2(s) {
-  return /^[a-z]*[^file][^find][^for]$/.test(s);
+  return /^[a-zA-Z]*[^file][^find][^for]$/.test(s);
 }
 
 function isBasicLatin3(s) {
-  return;
+  return /\b(?:[a-eg-z]|f(?!ile\b)(?!ind\b)(?!or))\w*\b/.test(s);
 }
