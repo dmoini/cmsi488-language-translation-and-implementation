@@ -52,7 +52,17 @@ NonNestingMLStyle {
 }
 
 BasicLatin2 {
-  // i did the wrong one oops
+    exp =  noFile   --sentence
+    | noFor      --words
+    | noFind    --spaces
+    | other
+    noFile = "fil" ("a".."d" | "f" .. "z") | "file" letter+ | letter+ "file"
+    noFor = "fo" ("a".."q" | "s".."z") | "for" letter+ | letter+ "for"
+    noFind = "fin" ("a".."m" | "o" .. "z") | "find" letter+ | letter+ "find"
+    other = ("a".."e" | "g".."z") letter+   --nonF
+    | "f" ("a".."h" | "j" .."n" |"p".."z")  letter+      --f
+    | "fi" ("a".."k" | "m" | "o".."z")  letter+    --fi
+    | "fo" ("a".."q" | "s".."z")  letter+    --fo
 }
 
 BasicLatin3 {
