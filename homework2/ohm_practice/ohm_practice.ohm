@@ -41,7 +41,9 @@ BinaryDivisibleByThirtyTwo {
 }
 
 DecimalTwoToThirtySix {
-  // TODO
+    number = ("1".."2") ("0" .. "9")       --tensandTwenties
+    | "3" ("0" .. "6")       --thirties
+    | ("2" .. "9")
 }
 
 NonNestingMLStyle {
@@ -52,9 +54,9 @@ NonNestingMLStyle {
 }
 
 BasicLatin2 {
-    exp =  noFile   --sentence
-    | noFor      --words
-    | noFind    --spaces
+    exp =  noFile   --noFile
+    | noFor      --noFor
+    | noFind    --noFind
     | other
     noFile = "fil" ("a".."d" | "f" .. "z") | "file" letter+ | letter+ "file"
     noFor = "fo" ("a".."q" | "s".."z") | "for" letter+ | letter+ "for"
