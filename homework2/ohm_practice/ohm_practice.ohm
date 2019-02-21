@@ -31,9 +31,9 @@ AdaNumericLiteral {
 
 BasicLatin1 {
 	exp = overThreeString | threeString |  oneTwoStrings
-  oneTwoStrings = letter (letter)?
-  threeString = letter ~("oo") letter letter 
-  overThreeString = letter letter letter letter+
+    oneTwoStrings = letter (letter)?
+    threeString = letter ~(caseInsensitive<"oo">) letter letter 
+    overThreeString = letter letter letter letter+
 }
 
 BinaryDivisibleByThirtyTwo {
@@ -45,11 +45,21 @@ DecimalTwoToThirtySix {
 }
 
 NonNestingMLStyle {
-  // TODO
+	comment = "(*"  exp  "*)" 
+  exp =  exp exp   --sentence
+         | letter+      --words
+         | space    --spaces   
 }
 
-BasicLatin2 {
-  // TODO
+BasicLatin1 {
+  // if you have better variable names please replace these monstrosities
+  // also basically for this one you can't use "~" so that's why it looks so ugly 
+	exp = overThreeString | threeOneOMid | threeOneOEnd | threeString  |  oneTwoStrings
+    oneTwoStrings = letter (letter)?
+    threeOneOMid = letter caseInsensitive<"o">  ("a".."n" | "p" .. "z" | "A" .. "N" | "P" .. "Z")
+    threeOneOEnd = letter ("a".."n" | "p" .. "z" | "A" .. "N" | "P" .. "Z") caseInsensitive<"o">
+    threeString = letter ("a".."n" | "p" .. "z" | "A" .. "N" | "P" .. "Z") letter 
+    overThreeString = letter letter letter letter+
 }
 
 BasicLatin3 {
