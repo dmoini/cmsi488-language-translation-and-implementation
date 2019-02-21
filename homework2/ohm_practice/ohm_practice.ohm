@@ -51,15 +51,8 @@ NonNestingMLStyle {
          | space        --spaces   
 }
 
-BasicLatin1 {
-  // if you have better variable names please replace these monstrosities
-  // also basically for this one you can't use "~" so that's why it looks so ugly 
-	exp = overThreeString | threeOneOMid | threeOneOEnd | threeString  |  oneTwoStrings
-    oneTwoStrings = letter (letter)?
-    threeOneOMid = letter caseInsensitive<"o">  ("a".."n" | "p" .. "z" | "A" .. "N" | "P" .. "Z")
-    threeOneOEnd = letter ("a".."n" | "p" .. "z" | "A" .. "N" | "P" .. "Z") caseInsensitive<"o">
-    threeString = letter ("a".."n" | "p" .. "z" | "A" .. "N" | "P" .. "Z") letter 
-    overThreeString = letter letter letter letter+
+BasicLatin2 {
+  // i did the wrong one oops
 }
 
 BasicLatin3 {
