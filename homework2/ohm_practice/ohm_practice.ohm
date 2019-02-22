@@ -37,7 +37,6 @@ AdaNumericLiteral {
   base 				      = ("1".."2") digit     					      --tensandTwenties
     				        | "3" ("0" .. "2")       				      --thirties
     				        | ("2" .. "9")							          --twotoNine
-                    
 }
 
 BasicLatin1 {
@@ -48,7 +47,7 @@ BasicLatin1 {
 }
 
 BinaryDivisibleByThirtyTwo {
-  // TODO
+
 }
 
 DecimalTwoToThirtySix {
