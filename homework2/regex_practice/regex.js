@@ -10,12 +10,18 @@ function isLegalVisaCard(s) {
 
 // https://www.regular-expressions.info/creditcard.html
 function isLegalMasterCard(s) {
-  return /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/.test(s);
+  return /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/.test(
+    s
+  );
 }
 
 function isAdaNumericLiteral(s) {
-  const decimal_literal = new RegExp(/^[0-9_]*\.?[0-9_]+([eE][+-]?[0-9_]+)?$/);
-  const based_literal = new RegExp(/^(([2-9]|1[0-6])#)([0-9A-F_]*\.?[0-9A-F_]+)+(#[eE][+-]?[0-9_]+)$/);
+  const decimal_literal = new RegExp(
+    /^[0-9]+(\_[0-9]+)*(\.([0-9]+(\_[0-9]+)*))?([eE][+-]?[0-9]+(\_[0-9]+)*)?$/
+  );
+  const based_literal = new RegExp(
+    /^([2-9]|1[0-6])#[0-9]+(\_[0-9A-Fa-f]+)*(\.([0-9A-Fa-f]+(\_[0-9A-Fa-f]+)*))?#([eE][+-]?[0-9]+(\_[0-9]+)*)?$/
+  );
   const numeric_literal = new RegExp(decimal_literal + "|" + based_literal);
   return numeric_literal.test(s);
 }
