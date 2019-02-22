@@ -26,20 +26,19 @@ function isAdaNumericLiteral(s) {
   return numeric_literal.test(s);
 }
 
-// Also we should save some for Teddy
-// Yeah there are three left they can split
 // https://regex101.com
 
-// Not sure about the correctness of this syntax
+// Checked! Works.
 function isBasicLatin1(s) {
-  return /^[a-zA-Z][^oO][^oO][a-zA-Z]*$/.test(s);
-  // Doesn't work for single-letter or two-letter words.
+  return /^([a-nA-N]*[p-zP-Z]*)*[oO]?([a-nA-N]*[p-zP-Z]*)*$/.test(s);
 }
 
+// Checked! Works.
 function isBinaryDivisibleByThirtyTwo(s) {
   return /^0{1,4}$|(1*0*)*00000$/.test(s);
 }
 
+// Checked! Works.
 function isDecimalTwoToThirtySix(s) {
   return /^\b([2-9]|[12][0-9]|3[0-6])\b$/.test(s);
 }
@@ -48,9 +47,15 @@ function isNonNestingMLStyle(s) {
   return /^\(\*[a-zA-Z]*\*\)$/.test(s);
 }
 
-// I'll try and do this one too :) - Alexia
+// Works! Full expression: ^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$|^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$|^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$|^[^f]+[a-zA-Z]*$|^f$|^fo$|^fi$|^fin$|^fil$
 function isBasicLatin2(s) {
-  return /^[a-zA-Z]*[^file][^find][^for]$/.test(s);
+  const substrings = new RegExp(/^f$|^fo$|^fi$|^fin$|^fil$/);
+  const not_file = new RegExp(/^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$/);
+  const not_find = new RegExp(/^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$/);
+  const not_for = new RegExp(/^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$/);
+  const not_start_with_f = new RegExp(/^[^f]+[a-zA-Z]*$/);
+  const basic_latin = new RegExp(substrings + "|" + not_file + "|" + not_find + "|" + not_for + "|" + not_start_with_f);
+  return basic_latin.test(s);
 }
 
 function isBasicLatin3(s) {
