@@ -1,0 +1,14 @@
+{
+  "name": "regex_practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "regex.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^6.0.1"
+  }
+}
