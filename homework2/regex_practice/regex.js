@@ -26,19 +26,14 @@ function isAdaFloat(s) {
   return numeric_literal.test(s);
 }
 
-// https://regex101.com
-
-// Checked! Works.
 function isNotThreeEndingInOO(s) {
   return /^([a-nA-N]*[p-zP-Z]*)*[oO]?([a-nA-N]*[p-zP-Z]*)*$/.test(s);
 }
 
-// Checked! Works.
 function isDivisibleBy32(s) {
   return /^0{1,4}$|(1*0*)*00000$/.test(s);
 }
 
-// Checked! Works.
 function isTwoThroughThirtySix(s) {
   return /^\b([2-9]|[12][0-9]|3[0-6])\b$/.test(s);
 }
@@ -56,21 +51,11 @@ function isNotForFileFindNoLookAround(s) {
   const not_find = new RegExp(/^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$/);
   const not_for = new RegExp(/^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$/);
   const not_start_with_f = new RegExp(/^[^f]+[a-zA-Z]*$/);
-  const basic_latin = new RegExp(
-    substrings +
-      "|" +
-      not_file +
-      "|" +
-      not_find +
-      "|" +
-      not_for +
-      "|" +
-      not_start_with_f
-  );
+  const basic_latin = new RegExp(substrings + "|" + not_file + "|" + not_find + "|" + not_for + "|" + not_start_with_f);
   return basic_latin.test(s);
 }
 
-function isBasicLatin3(s) {
+function isNotForFileFindWithLookAround(s) {
   return /\b(?:[a-eg-z]|f(?!ile\b)(?!ind\b)(?!or))\w*\b/.test(s);
 }
 
@@ -84,4 +69,5 @@ module.exports = {
   isTwoThroughThirtySix,
   isMLComment,
   isNotForFileFindNoLookAround,
+  isNotForFileFindWithLookAround,
 };
