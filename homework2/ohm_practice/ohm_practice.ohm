@@ -51,7 +51,7 @@ BinaryDivisibleByThirtyTwo {
 }
 
 DecimalTwoToThirtySix {
-    number          = ("1".."2") ("0" .. "9")           --tensandTwenties
+  number            = ("1".."2") ("0" .. "9")           --tensandTwenties
                     | "3" ("0" .. "6")                  --thirties
                     | ("2" .. "9")
 }
@@ -60,7 +60,7 @@ NonNestingMLStyle {
 	comment           = "(*"  exp  "*)" 
   exp               =  exp exp                          --sentences
                     | letter+                           --words
-                    | space                             --spaces   
+                    | space                             --spaces
 }
 
 BasicLatin2 {
