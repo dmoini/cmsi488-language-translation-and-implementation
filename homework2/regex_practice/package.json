@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "mocha": "^6.0.1"
+  },
+  "devDependencies": {
+    "mocha-webpack": "^2.0.0-beta.0"
   }
 }
