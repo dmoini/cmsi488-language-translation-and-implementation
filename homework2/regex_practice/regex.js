@@ -39,7 +39,7 @@ function isTwoThroughThirtySix(s) {
 }
 
 function isMLComment(s) {
-  return /^\(\*[a-zA-Z]*\*\)$/.test(s);
+  return /^\(\*((?!\(\*.*\*\)).)*\*\)$/.test(s);
 }
 
 // Works! Full expression: ^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$|^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$|^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$|^[^f]+[a-zA-Z]*$|^f$|^fo$|^fi$|^fin$|^fil$
