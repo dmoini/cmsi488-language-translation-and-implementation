@@ -43,14 +43,14 @@ function isNotForFileFindNoLookAround(s) {
   const not_file = new RegExp(/^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$/);
   const not_find = new RegExp(/^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$/);
   const not_for = new RegExp(/^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$/);
-  const not_start_with_f = new RegExp(/^[^f]+[a-zA-Z]*$/);
+  const not_start_with_f = new RegExp(/^[^f][a-zA-Z]*$/);
   const basic_latin = new RegExp(substrings + "|" + not_file + "|" + not_find + "|" + not_for + "|" + not_start_with_f);
   return basic_latin.test(s);
 }
 
-// TODO: fix
 function isNotForFileFindWithLookAround(s) {
-  return /\b(?:[a-eg-z]|f(?!ile\b)(?!ind\b)(?!or))\w*\b/.test(s);
+  return /^(?!(for|file|find)$).*$/.test(s);
+
 }
 
 module.exports = {
