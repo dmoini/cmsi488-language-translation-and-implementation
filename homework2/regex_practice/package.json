@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "regex.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "mocha"
   },
