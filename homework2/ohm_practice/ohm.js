@@ -26,8 +26,8 @@ const GRAMMARS = {
                       | "2" "3".."6" digit digit            --rangeThree
                       | "27" "0".."1" digit                 --rangeFour
                       | "2720"                         
-    fourDigits        = digit digit digit digit
     lastDigits        = fourDigits fourDigits fourDigits 
+    fourDigits        = digit digit digit digit
   }`,
   
   AdaFloat: `AdaFloat {
@@ -44,9 +44,8 @@ const GRAMMARS = {
                       | "2".."9"							              --twoToNine
   }`,
   
-  // TODO: fix input of ""
   NotThreeEndingInOO: `NotThreeEndingInOO {
-    exp               = overThreeString | threeString |  oneTwoStrings
+    exp               = (overThreeString | threeString |  oneTwoStrings)?
     oneTwoStrings     = letter letter?
     threeString       = letter ~(caseInsensitive<"oo">) letter letter 
     overThreeString   = letter letter letter letter+
