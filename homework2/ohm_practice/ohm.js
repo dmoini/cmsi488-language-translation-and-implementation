@@ -39,12 +39,12 @@ const GRAMMARS = {
     exponent          = ("e" | "E") ("+" | "-")? numeral
     basenum			      = hexDigit+ ("_" hexDigit+)* 			
     numeral           = digit+ ("_" digit+)*					
-    base 				      = ("1".."2") digit     					      --tensandTwenties
+    base 				      = ("1".."2") digit     					      --tensAndTwenties
                       | "3" "0".."2"       				          --thirties
-                      | "2".."9"							              --twotoNine
+                      | "2".."9"							              --twoToNine
   }`,
   
-  // TODO
+  // TODO: fix input of ""
   NotThreeEndingInOO: `NotThreeEndingInOO {
     exp               = overThreeString | threeString |  oneTwoStrings
     oneTwoStrings     = letter letter?
@@ -54,7 +54,11 @@ const GRAMMARS = {
   
   // TODO
   DivisibleBy32: `DivisibleBy32 {
-  
+    exp               = oneToFourZeroes 
+                      | zeroOrOne* fiveZeroes               --multipleZeroes
+    oneToFourZeroes   = "0" "0"? "0"? "0"?
+    zeroOrOne         = "0" | "1"
+    fiveZeroes        = "00000"
   }`,
   
   TwoThroughThirtySix: `TwoThroughThirtySix {
