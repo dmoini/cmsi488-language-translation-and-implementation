@@ -25,7 +25,7 @@ function isNotThreeEndingInOO(s) {
 }
 
 function isDivisibleBy32(s) {
-  return /^0{1,4}$|[01]*00000$/.test(s);
+  return /^0{1,}$|[01]*00000$/.test(s);
 }
 
 function isTwoThroughThirtySix(s) {
