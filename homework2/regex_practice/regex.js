@@ -37,14 +37,14 @@ function isMLComment(s) {
 }
 
 // Works! Full expression: ^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$|^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$|^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$|^[^f]+[a-zA-Z]*$|^f$|^fo$|^fi$|^fin$|^fil$
-// TODO: fix
 function isNotForFileFindNoLookAround(s) {
-  const substrings = new RegExp(/^f$|^fo$|^fi$|^fin$|^fil$/);
-  const not_file = new RegExp(/^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$/);
-  const not_find = new RegExp(/^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$/);
-  const not_for = new RegExp(/^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$/);
-  const not_start_with_f = new RegExp(/^[^f][a-zA-Z]*$/);
-  const basic_latin = new RegExp(substrings + "|" + not_file + "|" + not_find + "|" + not_for + "|" + not_start_with_f);
+  const not_file = /^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$/;
+  const not_find = /^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$/;
+  const not_for = /^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$/;
+  const not_start_with_f = /^[^f]+[a-zA-Z]*$/;
+  const substrings = /^f$|^fo$|^fi$|^fin$|^fil$/;
+  const empty_string = /^$/;
+  const basic_latin = new RegExp(not_file.source + "|" + not_find.source + "|" + not_for.source + "|" + not_start_with_f.source + "|" + substrings.source + "|" + empty_string.source);
   return basic_latin.test(s);
 }
 
