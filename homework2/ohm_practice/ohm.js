@@ -69,10 +69,9 @@ const GRAMMARS = {
   
   // TODO
   MLComment: `MLComment {
-    comment           = "(*"  exp  "*)" 
-    exp               =  exp exp                            --sentences
-                      | letter+                             --words
-                      | space                               --spaces
+    comment           = "(*" exp "*)" 
+    exp               = ~comment                            --notComment
+                      | any*                                --any
   }`,
   
   // TODO
