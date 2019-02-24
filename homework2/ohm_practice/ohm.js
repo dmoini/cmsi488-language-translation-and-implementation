@@ -2,7 +2,9 @@ const ohm = require("ohm-js");
 
 const GRAMMARS = {
   CanadianPostalCode: `CanadianPostalCode {
-    exp               = (firstAlpha digit goodAlpha space digit goodAlpha digit) --code
+    exp               = firstHalf space secondHalf          --code
+    firstHalf         = firstAlpha digit goodAlpha
+    secondHalf        = digit goodAlpha digit
     firstAlpha        = ~badFirst upper
     goodAlpha         = ~badAlpha upper 
     badAlpha          = "D" | "F" | "I" | "O" | "Q" | "U"
@@ -11,14 +13,14 @@ const GRAMMARS = {
   
   Visa: `Visa {
     exp               = "4" lastDigits
+    lastDigits        = threeDigits threeDigits threeDigits threeDigits threeDigits?
     threeDigits       = digit digit digit
-    lastDigits        = threeDigits threeDigits threeDigits threeDigits (threeDigits)?
   }`,
   
   MasterCard: `MasterCard {
-    exp               = (firstDigits lastDigits)
+    exp               = firstDigits lastDigits
     firstDigits       = caseA | caseB
-    caseA             = ("5" "1".."5") digit digit          
+    caseA             = "5" "1".."5" digit digit          
     caseB             = "222" digit                         --rangeOne
                       | "22" "3".."9" digit                 --rangeTwo
                       | "2" "3".."6" digit digit            --rangeThree
@@ -38,13 +40,14 @@ const GRAMMARS = {
     basenum			      = hexDigit+ ("_" hexDigit+)* 			
     numeral           = digit+ ("_" digit+)*					
     base 				      = ("1".."2") digit     					      --tensandTwenties
-                      | "3" ("0" .. "2")       				      --thirties
-                      | ("2" .. "9")							          --twotoNine
+                      | "3" "0".."2"       				          --thirties
+                      | "2".."9"							              --twotoNine
   }`,
   
+  // TODO
   NotThreeEndingInOO: `NotThreeEndingInOO {
     exp               = overThreeString | threeString |  oneTwoStrings
-    oneTwoStrings     = letter (letter)?
+    oneTwoStrings     = letter letter?
     threeString       = letter ~(caseInsensitive<"oo">) letter letter 
     overThreeString   = letter letter letter letter+
   }`,
@@ -55,22 +58,24 @@ const GRAMMARS = {
   }`,
   
   TwoThroughThirtySix: `TwoThroughThirtySix {
-    number            = ("1".."2") ("0" .. "9")           --tensandTwenties
-                      | "3" ("0" .. "6")                  --thirties
-                      | ("2" .. "9")
+    number            = "1".."2" "0".."9"                   --tensAndTwenties
+                      | "3" "0".."6"                        --thirties
+                      | "2".."9"
   }`,
   
+  // TODO
   MLComment: `MLComment {
     comment           = "(*"  exp  "*)" 
-    exp               =  exp exp                          --sentences
-                      | letter+                           --words
-                      | space                             --spaces
+    exp               =  exp exp                            --sentences
+                      | letter+                             --words
+                      | space                               --spaces
   }`,
   
+  // TODO
   NotForFileFindNoLookAround: `NotForFileFindNoLookAround {
-    exp               =  noFile                           --noFile
-                      | noFor                             --noFor
-                      | noFind                            --noFind
+    exp               = noFile                              --noFile
+                      | noFor                               --noFor
+                      | noFind                              --noFind
                       | other
     noFile            = "fil" ("a".."d" | "f" .. "z") | "file" letter+ | letter+ "file"
     noFor             = "fo" ("a".."q" | "s".."z") | "for" letter+ | letter+ "for"
@@ -81,9 +86,10 @@ const GRAMMARS = {
                       | "fo" ("a".."q" | "s".."z")  letter+                --fo
   }`,
   
+  // TODO
   // not sure if it should accept things like files
   NotForFileFindWithLookAround: `NotForFileFindWithLookAround {
-    exp               = ~(badWords) (letter)*
+    exp               = ~badWords letter*
     badWords          = "file" | "for" | "find"
   }`
 }
