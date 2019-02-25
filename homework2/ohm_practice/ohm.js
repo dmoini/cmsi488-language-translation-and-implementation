@@ -67,42 +67,32 @@ const GRAMMARS = {
     comment           = "(*" exp "*)" 
     exp               = (~"*)" any)*                            --notComment
   }`,
-  
-  // TODO
-  // NotForFileFindNoLookAround: `NotForFileFindNoLookAround {
-  //   exp               = (noFile | noFor | noFind | other)?
-  //   noFile            = "fil" ("a".."d" | "f".."z") | "file" letter+ | letter+ "file"
-  //   noFor             = "fo" ("a".."q" | "s".."z") | "for" letter+ | letter+ "for"
-  //   noFind            = "fin" ("a".."c" | "e".."z") | "find" letter+ | letter+ "find"
-  //   other             = ("a".."e" | "g".."z") letter+                      --nonF
-  //                     | "f" ("a".."h" | "j".."n" |"p".."z") letter+       --f
-  //                     | "fi" ("a".."k" | "m" | "o".."z") letter+          --fi
-  //                     | "fo" ("a".."q" | "s".."z") letter+                --fo
-  // }`,
+
   NotForFileFindNoLookAround: `NotForFileFindNoLookAround {
-    exp               = (other | noFile | noFind | noFor)?
-    noFor             = foString | fString                                --noFor
-    noFile            = filString | fiString | fString                    --noFile
-    noFind            = finString | fiString | fString                    --noFind
-    other             = forString | fileString | findString | noFString   --other        
-    noFString         = ("a".."e" | "g".."z") letter+                     --noFString
-    fString           = "f" (("a".."h" | "j".."n" | "p".."q") letter*)?   --fString
-    foString          = "fo" (("a".."q" | "s".."z") letter*)?             --foString
-    fiString          = "fi" (("a".."k" | "m" | "o".."z") letter*)?       --fiString
-    filString         = "fil" (("a".."d" | "f".."z") letter*)?            --filString
-    finString         = "fin" (("a".."c" | "e".."z") letter*)?            --finString
-    forString         = "for" letter+                                     --letterFor
-                      | letter+ "for"                                     --forLetter
-    fileString        = "file" letter+                                    --letterFile
-                      | letter+ "file"                                    --fileLetter
-    findString        = "find" letter+                                    --letterFind
-                      | letter+ "find"                                    --findLetter
+    exp               = noF | for | fo | file | find | fil | fin | fi | f       --ok
+    f                 = "f" (("a".."h" | "j".."n" | "p".."q") asciiLetter*)?    --f
+    fi                = "fi" (("a".."k" | "m" | "o".."z") asciiLetter*)?        --fi
+    fin               = "fin" (("a".."c" | "e".."z") asciiLetter*)?             --fin
+    find              = asciiLetter+ "find"                                     --letterFind
+                      | "find" asciiLetter+                                     --findLetter
+                      | asciiLetter+ "find" asciiLetter+                        --letterFindLetter
+    fil               = "fil" (("a".."d" | "f".."z") asciiLetter*)?             --fil
+    file              = asciiLetter+ "file"                                     --letterFile
+                      | "file" asciiLetter+                                     --fileLetter
+                      | asciiLetter+ "file" asciiLetter+                        --letterFileLetter
+    fo                = "fo" (("a".."q" | "s".."z") asciiLetter*)?              --fo
+    for               = asciiLetter+ "for"                                      --letterFor
+                      | "for" asciiLetter+                                      --forLetter
+                      | asciiLetter+ "for" asciiLetter+                         --letterForLetter
+    noF               = ~"f" asciiLetter*                                       --noF
+    asciiLetter       = "A".."Z" | "a".."z"                                     --asciiLetter
   }`,
 
   
   NotForFileFindWithLookAround: `NotForFileFindWithLookAround {
-    exp               = ~badWords ("A".."Z" | "a".."z")*
+    exp               = ~badWords asciiLetter*
     badWords          = ("file" | "for" | "find") end
+    asciiLetter      = "A".."Z" | "a".."z"
   }`
 }
 
