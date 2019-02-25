@@ -1,7 +1,7 @@
 const assert = require("assert");
 const o = require("../ohm");
 
-const FIXTURE = {
+  const FIXTURE = {
     isCanadianPostalCode: {
       good: ["A7X 2P8", "P8E 4R2"],
       bad: ["A7X   9B2", "C7E9U2", "", "Dog"],
@@ -19,18 +19,18 @@ const FIXTURE = {
       bad: ["dog", "4fe", "p#ii#", "_", "_33", "5__2", "9#88#E-1e3", "-6"],
     },
     isNotThreeEndingInOO: {
-      good: ["", "fog", "Tho"],
-      bad: ["fOo", "gOO"],
+      good: ["", "fog", "Tho", "toodle", "thoo", "moOd"],
+      bad: ["fOo", "gOO", "too", "coO"],
     },
     isDivisibleBy32: {
-      good: ["0", "110100000"],
+      good: ["0", "00", "000", "0000", "110100000", "1000000000001000000"],
       bad: ["1", "0000000010000", "1000000001"],
     },
     isTwoThroughThirtySix: {
       good: Array(35)
         .fill(0)
         .map((x, i) => i + 2),
-      bad: ["1", "0", "00003", "dog", "361"],
+      bad: ["1", "0", "00003", "dog", "361", "37"],
     },
     isMLComment: {
       good: ["(**)", "(*  *)", "(*756****)"],
