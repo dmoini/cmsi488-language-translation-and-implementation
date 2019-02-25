@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mocha": "^6.0.1"
+    "mocha": "^6.0.1",
+    "ohm-js": "^0.14.0"
   },
   "devDependencies": {
     "mocha-webpack": "^1.1.0"
