@@ -21,7 +21,7 @@ function isAdaFloat(s) {
 }
 
 function isNotThreeEndingInOO(s) {
-  return /^[a-zA-Z][^oO][^oO]$|^[a-zA-Z]{1,2}$|^[a-zA-Z]{4,}$/.test(s);
+  return /^[a-zA-Z][a-nA-Np-zP-Z]{2}$|^[a-zA-Z]{2}[a-nA-Np-zP-Z]$|^[a-zA-Z][a-nA-Np-zP-Z][a-zA-Z]$|^[a-zA-Z]{0,2}$|^[a-zA-Z]{4,}$/.test(s);
 }
 
 function isDivisibleBy32(s) {
