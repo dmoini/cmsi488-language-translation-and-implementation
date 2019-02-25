@@ -37,7 +37,7 @@ const FIXTURE = {
       bad: ["", "(*)", "(* before (* inner *) after *)"],
     },
     isNotForFileFindNoLookAround: {
-      good: ["", "files", "fors", "dog", "f", "fi", "fo", "fil", "fin"],
+      good: ["", "files", "fors", "dog", "f", "fi", "fo", "fil", "fin", "FOR", "FILE", "FIND"],
       bad: ["for", "file", "find"],
     },
   };
