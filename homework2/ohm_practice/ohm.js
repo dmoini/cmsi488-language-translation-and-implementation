@@ -69,25 +69,40 @@ const GRAMMARS = {
   }`,
   
   // TODO
+  // NotForFileFindNoLookAround: `NotForFileFindNoLookAround {
+  //   exp               = (noFile | noFor | noFind | other)?
+  //   noFile            = "fil" ("a".."d" | "f".."z") | "file" letter+ | letter+ "file"
+  //   noFor             = "fo" ("a".."q" | "s".."z") | "for" letter+ | letter+ "for"
+  //   noFind            = "fin" ("a".."c" | "e".."z") | "find" letter+ | letter+ "find"
+  //   other             = ("a".."e" | "g".."z") letter+                      --nonF
+  //                     | "f" ("a".."h" | "j".."n" |"p".."z") letter+       --f
+  //                     | "fi" ("a".."k" | "m" | "o".."z") letter+          --fi
+  //                     | "fo" ("a".."q" | "s".."z") letter+                --fo
+  // }`,
   NotForFileFindNoLookAround: `NotForFileFindNoLookAround {
-    exp               = noFile                                  --noFile
-                      | noFor                                   --noFor
-                      | noFind                                  --noFind
-                      | other
-    noFile            = "fil" ("a".."d" | "f" .. "z") | "file" letter+ | letter+ "file"
-    noFor             = "fo" ("a".."q" | "s".."z") | "for" letter+ | letter+ "for"
-    noFind            = "fin" ("a".."m" | "o" .. "z") | "find" letter+ | letter+ "find"
-    other             = ("a".."e" | "g".."z") letter+                      --nonF
-                      | "f" ("a".."h" | "j" .."n" |"p".."z")  letter+      --f
-                      | "fi" ("a".."k" | "m" | "o".."z")  letter+          --fi
-                      | "fo" ("a".."q" | "s".."z")  letter+                --fo
+    exp               = (other | noFile | noFind | noFor)?
+    noFor             = foString | fString                                --noFor
+    noFile            = filString | fiString | fString                    --noFile
+    noFind            = finString | fiString | fString                    --noFind
+    other             = forString | fileString | findString | noFString   --other        
+    noFString         = ("a".."e" | "g".."z") letter+                     --noFString
+    fString           = "f" (("a".."h" | "j".."n" | "p".."q") letter*)?   --fString
+    foString          = "fo" (("a".."q" | "s".."z") letter*)?             --foString
+    fiString          = "fi" (("a".."k" | "m" | "o".."z") letter*)?       --fiString
+    filString         = "fil" (("a".."d" | "f".."z") letter*)?            --filString
+    finString         = "fin" (("a".."c" | "e".."z") letter*)?            --finString
+    forString         = "for" letter+                                     --letterFor
+                      | letter+ "for"                                     --forLetter
+    fileString        = "file" letter+                                    --letterFile
+                      | letter+ "file"                                    --fileLetter
+    findString        = "find" letter+                                    --letterFind
+                      | letter+ "find"                                    --findLetter
   }`,
+
   
-  // TODO
-  // not sure if it should accept things like files
   NotForFileFindWithLookAround: `NotForFileFindWithLookAround {
-    exp               = ~badWords letter*
-    badWords          = "file" | "for" | "find"
+    exp               = ~badWords (A-Za-z)*
+    badWords          = ("file" | "for" | "find") end
   }`
 }
 
