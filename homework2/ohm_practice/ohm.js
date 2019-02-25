@@ -101,7 +101,7 @@ const GRAMMARS = {
 
   
   NotForFileFindWithLookAround: `NotForFileFindWithLookAround {
-    exp               = ~badWords (A-Za-z)*
+    exp               = ~badWords ("A".."Z" | "a".."z")*
     badWords          = ("file" | "for" | "find") end
   }`
 }
