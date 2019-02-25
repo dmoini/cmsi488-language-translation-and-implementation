@@ -62,11 +62,10 @@ const GRAMMARS = {
                       | "2".."9"
   }`,
   
-  // TODO
+  // TODO: double check with Toal
   MLComment: `MLComment {
     comment           = "(*" exp "*)" 
-    exp               = ~comment                                --notComment
-                      | any*                                    --any
+    exp               = (~"*)" any)*                            --notComment
   }`,
   
   // TODO
