@@ -27,9 +27,7 @@ const FIXTURE = {
     bad: ["1", "0000000010000", "1000000001", " 110100000", "110100000 ", "1101 00000", "200000", "a00000"],
   },
   isTwoThroughThirtySix: {
-    good: Array(35)
-      .fill(0)
-      .map((x, i) => i + 2),
+    good: Array(35).fill(0).map((x, i) => i + 2),
     bad: ["1", "0", "00003", "dog", "361", "37", " 4", "4 ", "3 6", "-8"],
   },
   isMLComment: {
