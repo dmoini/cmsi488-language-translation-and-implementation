@@ -69,30 +69,30 @@ const GRAMMARS = {
   }`,
 
   NotForFileFindNoLookAround: `NotForFileFindNoLookAround {
-    exp               = noF | for | fo | file | find | fil | fin | fi | f       --ok
-    f                 = "f" (("a".."h" | "j".."n" | "p".."q") asciiLetter*)?    --f
-    fi                = "fi" (("a".."k" | "m" | "o".."z") asciiLetter*)?        --fi
-    fin               = "fin" (("a".."c" | "e".."z") asciiLetter*)?             --fin
-    find              = asciiLetter+ "find"                                     --letterFind
-                      | "find" asciiLetter+                                     --findLetter
-                      | asciiLetter+ "find" asciiLetter+                        --letterFindLetter
-    fil               = "fil" (("a".."d" | "f".."z") asciiLetter*)?             --fil
-    file              = asciiLetter+ "file"                                     --letterFile
-                      | "file" asciiLetter+                                     --fileLetter
-                      | asciiLetter+ "file" asciiLetter+                        --letterFileLetter
-    fo                = "fo" (("a".."q" | "s".."z") asciiLetter*)?              --fo
-    for               = asciiLetter+ "for"                                      --letterFor
-                      | "for" asciiLetter+                                      --forLetter
-                      | asciiLetter+ "for" asciiLetter+                         --letterForLetter
-    noF               = ~"f" asciiLetter*                                       --noF
-    asciiLetter       = "A".."Z" | "a".."z"                                     --asciiLetter
+    exp               = noF | for | fo | file | find | fil | fin | fi | f                 --valid
+    f                 = "f" (("a".."h" | "j".."n" | "p".."q" | "A".."Z") asciiLetter*)?   --f
+    fi                = "fi" (("a".."k" | "m" | "o".."z" | "A".."Z") asciiLetter*)?       --fi
+    fin               = "fin" (("a".."c" | "e".."z" | "A".."Z") asciiLetter*)?            --fin
+    find              = asciiLetter+ "find"                                               --letterFind
+                      | "find" asciiLetter+                                               --findLetter
+                      | asciiLetter+ "find" asciiLetter+                                  --letterFindLetter
+    fil               = "fil" (("a".."d" | "f".."z" | "A".."Z") asciiLetter*)?            --fil
+    file              = asciiLetter+ "file"                                               --letterFile
+                      | "file" asciiLetter+                                               --fileLetter
+                      | asciiLetter+ "file" asciiLetter+                                  --letterFileLetter
+    fo                = "fo" (("a".."q" | "s".."z" | "A".."Z") asciiLetter*)?             --fo
+    for               = asciiLetter+ "for"                                                --letterFor
+                      | "for" asciiLetter+                                                --forLetter
+                      | asciiLetter+ "for" asciiLetter+                                   --letterForLetter
+    noF               = ~"f" asciiLetter*                                                 --noF
+    asciiLetter       = "a".."z" | "A".."Z"                                               --asciiLetter
   }`,
 
   
   NotForFileFindWithLookAround: `NotForFileFindWithLookAround {
     exp               = ~badWords asciiLetter*
     badWords          = ("file" | "for" | "find") end
-    asciiLetter      = "A".."Z" | "a".."z"
+    asciiLetter      = "a".."z" | "A".."Z"
   }`
 }
 
