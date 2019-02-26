@@ -33,8 +33,8 @@ const FIXTURE = {
     bad: ["1", "0", "00003", "dog", "361", "37", " 4", "4 ", "3 6", "-8"],
   },
   isMLComment: {
-    good: ["(**)", "(*  *)", "(*756****)", "(* c o m m e n t *)"],
-    bad: ["", "(*)", "(* before (* inner *) after *)"],
+    good: ["(**)", "(*  *)", "(*756****)", "(* c o m m e n t *)", "(* (* *)", "(* * (* (* (* *)"],
+    bad: ["", "(*)", "(* before (* inner *) after *)", " (**)"],
   },
   isNotForFileFindNoLookAround: {
     good: ["", "files", "fors", "dog", "f", "fi", "fo", "fil", "fin", "FOR", "FILE", "FIND", "fILe", "FoR", "FiNd", "fInd"],
