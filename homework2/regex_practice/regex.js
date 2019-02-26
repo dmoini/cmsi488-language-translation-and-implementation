@@ -33,7 +33,7 @@ function isTwoThroughThirtySix(s) {
 }
 
 function isMLComment(s) {
-  return /^\(\*((?!\(\*.*\*\)).)*\*\)$/.test(s);
+  return /^\(\*((?!\*\)).)*\*\)$/.test(s);
 }
 
 function isNotForFileFindNoLookAround(s) {
