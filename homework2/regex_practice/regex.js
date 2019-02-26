@@ -47,7 +47,7 @@ function isNotForFileFindNoLookAround(s) {
 }
 
 function isNotForFileFindWithLookAround(s) {
-  return /^(?!(for|file|find)$).*$/.test(s);
+  return /^(?!(for|file|find)$)[a-zA-Z]*$/.test(s);
 
 }
 
