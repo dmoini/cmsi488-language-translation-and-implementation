@@ -23,22 +23,23 @@ const FIXTURE = {
     bad: ["fOo", "gOO", "too", "coO"],
   },
   isDivisibleBy32: {
-    good: ["0", "00", "000", "0000", "110100000", "1000000000001000000"],
-    bad: ["1", "0000000010000", "1000000001"],
+    good: ["0", "00", "000", "0000", "0000000000000000000","110100000", "1000000000001000000", "010101010101010011010100000"],
+    bad: ["1", "0000000010000", "1000000001", " 110100000", "110100000 ", "1101 00000", "200000", "a00000"],
   },
   isTwoThroughThirtySix: {
     good: Array(35)
       .fill(0)
       .map((x, i) => i + 2),
-    bad: ["1", "0", "00003", "dog", "361", "37"],
+    bad: ["1", "0", "00003", "dog", "361", "37", " 4", "4 ", "3 6", "-8"],
   },
   isMLComment: {
-    good: ["(**)", "(*  *)", "(*756****)"],
+    good: ["(**)", "(*  *)", "(*756****)", "(* c o m m e n t *)"],
     bad: ["", "(*)", "(* before (* inner *) after *)"],
   },
   isNotForFileFindNoLookAround: {
-    good: ["", "files", "fors", "dog", "f", "fi", "fo", "fil", "fin", "FOR", "FILE", "FIND"],
+    good: ["", "files", "fors", "dog", "f", "fi", "fo", "fil", "fin", "FOR", "FILE", "FIND", "fILe", "FoR", "FiNd", "fInd"],
     bad: ["for", "file", "find"],
+    // TODO: ask Toal about "2", "f0r"
   },
 };
 
