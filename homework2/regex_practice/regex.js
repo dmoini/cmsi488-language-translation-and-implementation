@@ -25,7 +25,7 @@ function isNotThreeEndingInOO(s) {
 }
 
 function isDivisibleBy32(s) {
-  return /^0{1,}$|[01]*00000$/.test(s);
+  return /^0{1,}$|^[01]*00000$/.test(s);
 }
 
 function isTwoThroughThirtySix(s) {
@@ -36,15 +36,13 @@ function isMLComment(s) {
   return /^\(\*((?!\(\*.*\*\)).)*\*\)$/.test(s);
 }
 
-// Works! Full expression: ^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$|^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$|^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$|^[^f]+[a-zA-Z]*$|^f$|^fo$|^fi$|^fin$|^fil$
 function isNotForFileFindNoLookAround(s) {
-  const not_file = /^f[^io][a-zA-Z]*$|^fi[^ln][a-zA-Z]*$|^fil[^e][a-zA-Z]*$|^file[a-zA-Z]+$/;
-  const not_find = /^fin[^d][a-zA-Z]*$|^find[a-zA-Z]+$/;
-  const not_for = /^fo[^r][a-zA-Z]*$|^for[a-zA-Z]+$/;
-  const not_start_with_f = /^[^f]+[a-zA-Z]*$/;
-  const substrings = /^f$|^fo$|^fi$|^fin$|^fil$/;
-  const empty_string = /^$/;
-  const basic_latin = new RegExp(not_file.source + "|" + not_find.source + "|" + not_for.source + "|" + not_start_with_f.source + "|" + substrings.source + "|" + empty_string.source);
+  const not_file = /^f[a-hj-np-zA-Z][a-zA-Z]*$|^fi[a-kmo-zA-Z][a-zA-Z]*$|^fil[a-df-zA-Z][a-zA-Z]*$|^file[a-zA-Z]+$/;
+  const not_find = /^fin[a-ce-zA-Z][a-zA-Z]*$|^find[a-zA-Z]+$/;
+  const not_for = /^fo[a-qs-zA-Z][a-zA-Z]*$|^for[a-zA-Z]+$/;
+  const not_start_with_f = /^[a-eg-zA-Z][a-zA-Z]*$/;
+  const substrings = /^$|^f$|^fo$|^fi$|^fin$|^fil$/;
+  const basic_latin = new RegExp(not_file.source + "|" + not_find.source + "|" + not_for.source + "|" + not_start_with_f.source + "|" + substrings.source);
   return basic_latin.test(s);
 }
 
