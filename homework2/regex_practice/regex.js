@@ -1,6 +1,6 @@
 // https://stackoverflow.com/questions/15774555/efficient-regex-for-canadian-postal-code-function
 function isCanadianPostalCode(s) {
-  return /^[^DFIOQUWZdfioquwz]\d[^DFIOQUdfioqu]\s\d[^DFIOQUdfioqu]\d$/.test(s);
+  return /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]\s\d[ABCEGHJ-NPRSTV-Z]\d$/.test(s);
 }
 
 // https://www.regular-expressions.info/creditcard.html
