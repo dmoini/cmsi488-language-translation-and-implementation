@@ -36,7 +36,7 @@ const FIXTURE = {
   },
   isNotForFileFindNoLookAround: {
     good: ["", "files", "fors", "dog", "f", "fi", "fo", "fil", "fin", "FOR", "FILE", "FIND", "fILe", "FoR", "FiNd", "fInd"],
-    bad: ["for", "file", "find", "2", "f0r", "@for"],
+    bad: ["for", "file", "find", "2", "f0r", "@for", "αßΓ", "piñata"],
   },
 };
 
