@@ -54,7 +54,7 @@ const GRAMMARS = {
   DivisibleBy32: `DivisibleBy32 {
     exp          	    = (~("00000" end) ("0" | "1"))* "00000"		--nonZero
     				          | "0" "0"? "0"? "0"?				              --zero
-}`,
+  }`,
   
   TwoThroughThirtySix: `TwoThroughThirtySix {
     number            = "1".."2" "0".."9"                       --tensAndTwenties
