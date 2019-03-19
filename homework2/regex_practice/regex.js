@@ -5,7 +5,7 @@ function isCanadianPostalCode(s) {
 
 // https://www.regular-expressions.info/creditcard.html
 function isVisa(s) {
-  return /^4[0-9]{12}(?:[0-9]{3}){1,2}?$/.test(s);
+  return /^4[0-9]{12}([0-9]{3})?$/.test(s);
 }
 
 // https://www.regular-expressions.info/creditcard.html
