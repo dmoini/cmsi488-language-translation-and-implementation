@@ -45,8 +45,7 @@
 
       1. Like number 2, the scope also begins inside the function `f()`. However, unlike problem 2 where `x` defaults to `undefined`, `x` in this case needs to be declared at the beginning of the function before it can be accessed.
 
-   4. `75354253672`
-
+   4. `75354253672`  
       `75354253674`
 
       1. The scope begins within the function. Since the variable `x` was never properly initialized because its scope begins within the function, it never points to the global `var x = 3` and thus looks like it is just some memory address. This looks to be similar to C/C++, where accessing an un-initialized variable can give undefined behavior and the compiler can do literally whatever it wants. In this case, it looks like it may have assigned some unused memory address.
