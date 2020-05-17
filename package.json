@@ -19,7 +19,7 @@
   "devDependencies": {
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.20.2"
   },
   "dependencies": {
     "ohm-js": "^0.14.0"
